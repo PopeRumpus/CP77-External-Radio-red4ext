@@ -1,18 +1,20 @@
 [package]
 name = "cp77_external_radio"
-version = "2.1.14"
-edition = "2021"
+version = "2.1.15"
+edition = "2024"
+rust-version = "1.95"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-red4ext-rs = { git = "https://github.com/jac3km4/red4ext-rs.git"}
+# red4ext-rs 0.11.2 — bundles RED4ext.SDK with Cyberpunk 2077 patch 2.5 support.
+red4ext-rs = { git = "https://github.com/jac3km4/red4ext-rs.git", rev = "1ea91e7" }
 
 [dependencies.windows]
-version = "0.35.0"
-features = [
-    "Media_Control",
-    "Media",
-    "Foundation"
-]
+version = "0.58"
+features = ["Foundation", "Media_Control"]
+
+[profile.release]
+lto = true
+codegen-units = 1
